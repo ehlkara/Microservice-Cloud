@@ -1,0 +1,4 @@
+C:\Users\ehlka\OneDrive\Masaüstü\Project\obj\Debug\net6.0\TempTestProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ehlka\OneDrive\Masaüstü\Project\obj\Debug\net6.0\TempTestProject.AssemblyInfoInputs.cache
+C:\Users\ehlka\OneDrive\Masaüstü\Project\obj\Debug\net6.0\TempTestProject.AssemblyInfo.cs
+C:\Users\ehlka\OneDrive\Masaüstü\Project\obj\Debug\net6.0\TempTestProject.csproj.CoreCompileInputs.cache

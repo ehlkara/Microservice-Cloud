@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "dgSpecHash": "J64nlTaLSiA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ehlka\\OneDrive\\Masaüstü\\Project\\TempTestProject.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ehlka\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\ehlka\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
+    "C:\\Users\\ehlka\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "'System.Text.Json' 6.0.0 paketinde önem derecesi yüksek olan bilinen bir https://github.com/advisories/GHSA-8g4q-xg66-9fp4 güvenlik açığı var",
+      "projectPath": "C:\\Users\\ehlka\\OneDrive\\Masaüstü\\Project\\TempTestProject.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\ehlka\\OneDrive\\Masaüstü\\Project\\TempTestProject.csproj",
+      "libraryId": "System.Text.Json",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}

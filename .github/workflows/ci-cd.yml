@@ -1,0 +1,87 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push OrderService
+        uses: docker/build-push-action@v4
+        with:
+          context: ./OrderService
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/orderservice:latest
+
+      - name: Build and push InvoiceService
+        uses: docker/build-push-action@v4
+        with:
+          context: ./InvoiceService
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/invoiceservice:latest
+
+      - name: Build and push MembershipService
+        uses: docker/build-push-action@v4
+        with:
+          context: ./MembershipService
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/membershipservice:latest
+
+      - name: Build and push SnapshotCoordinator
+        uses: docker/build-push-action@v4
+        with:
+          context: ./SnapshotCoordinator
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/snapshotcoordinator:latest
+
+      - name: Deploy to Kubernetes
+        if: github.ref == 'refs/heads/main'
+        uses: azure/k8s-deploy@v1
+        with:
+          manifests: |
+            k8s/order-deployment.yaml
+            k8s/order-service.yaml
+            k8s/order-hpa.yaml
+            k8s/rabbitmq-statefulset.yaml
+            k8s/dht-configmap.yaml
+          images: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/orderservice:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/invoiceservice:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/membershipservice:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/snapshotcoordinator:latest 

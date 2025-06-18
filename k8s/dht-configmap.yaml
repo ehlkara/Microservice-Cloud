@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dht-config
+data:
+  CHORD_M: "8"           # 2^8 = 256 nodes in the ring
+  CHORD_K: "3"           # Number of successors to maintain
+  STABILIZE_INTERVAL: "30"  # Stabilize interval in seconds
+  FIX_FINGERS_INTERVAL: "60" # Fix fingers interval in seconds
+  CHECK_PREDECESSOR_INTERVAL: "30" # Check predecessor interval in seconds
+  GOSSIP_INTERVAL: "10"  # Gossip interval in seconds
+  SNAPSHOT_INTERVAL: "300" # Snapshot interval in seconds 

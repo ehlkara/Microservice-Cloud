@@ -1,0 +1,11 @@
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\bin\Debug\net9.0\Shared.Utils.deps.json
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\bin\Debug\net9.0\Shared.Utils.dll
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\bin\Debug\net9.0\Shared.Utils.pdb
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\obj\Debug\net9.0\Shared.Utils.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\obj\Debug\net9.0\Shared.Utils.AssemblyInfoInputs.cache
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\obj\Debug\net9.0\Shared.Utils.AssemblyInfo.cs
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\obj\Debug\net9.0\Shared.Utils.csproj.CoreCompileInputs.cache
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\obj\Debug\net9.0\Shared.Utils.dll
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\obj\Debug\net9.0\refint\Shared.Utils.dll
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\obj\Debug\net9.0\Shared.Utils.pdb
+C:\Users\ehlka\OneDrive\Masaüstü\Project\Shared.Utils\obj\Debug\net9.0\ref\Shared.Utils.dll

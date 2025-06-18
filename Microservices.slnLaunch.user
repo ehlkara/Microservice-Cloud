@@ -1,0 +1,23 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "OrderService\\OrderService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "InvoiceService\\InvoiceService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "SnapshotCoordinator\\SnapshotCoordinator.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "MembershipService\\MembershipService.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

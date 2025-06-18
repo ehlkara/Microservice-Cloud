@@ -1,0 +1,7 @@
+{
+  "test_scenarios": {
+    "normal_traffic": 47334,
+    "order_success_rate": 0.9880148005148005,
+    "average_response_time": 336.92374890776296
+  }
+}

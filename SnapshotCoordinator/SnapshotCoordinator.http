@@ -1,0 +1,6 @@
+@SnapshotCoordinator_HostAddress = http://localhost:5230
+
+GET {{SnapshotCoordinator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

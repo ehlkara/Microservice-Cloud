@@ -1,0 +1,11 @@
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\bin\Debug\net9.0\ServiceDiscovery.deps.json
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\bin\Debug\net9.0\ServiceDiscovery.dll
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\bin\Debug\net9.0\ServiceDiscovery.pdb
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\obj\Debug\net9.0\ServiceDiscovery.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\obj\Debug\net9.0\ServiceDiscovery.AssemblyInfoInputs.cache
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\obj\Debug\net9.0\ServiceDiscovery.AssemblyInfo.cs
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\obj\Debug\net9.0\ServiceDiscovery.csproj.CoreCompileInputs.cache
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\obj\Debug\net9.0\ServiceDiscovery.dll
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\obj\Debug\net9.0\refint\ServiceDiscovery.dll
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\obj\Debug\net9.0\ServiceDiscovery.pdb
+C:\Users\ehlka\OneDrive\Masaüstü\Project\ServiceDiscovery\obj\Debug\net9.0\ref\ServiceDiscovery.dll

@@ -1,0 +1,151 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"   # RabbitMQ port
+      - "15672:15672" # Management UI port
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin123
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - microservices-network
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - microservices-network
+    restart: unless-stopped
+
+  order-service:
+    build:
+      context: .
+      dockerfile: OrderService/Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDbSettings__ConnectionString=mongodb://mongodb:27017
+      - MongoDbSettings__DatabaseName=OrderDb
+      - RabbitMqSettings__HostName=rabbitmq
+      - RabbitMqSettings__UserName=guest
+      - RabbitMqSettings__Password=guest
+    depends_on:
+      - mongodb
+      - rabbitmq
+    networks:
+      - microservices-network
+    restart: unless-stopped
+
+  invoice-service:
+    build:
+      context: .
+      dockerfile: InvoiceService/Dockerfile
+    ports:
+      - "5002:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDbSettings__ConnectionString=mongodb://mongodb:27017
+      - MongoDbSettings__DatabaseName=InvoiceDb
+      - RabbitMqSettings__HostName=rabbitmq
+      - RabbitMqSettings__UserName=guest
+      - RabbitMqSettings__Password=guest
+    depends_on:
+      - mongodb
+      - rabbitmq
+    networks:
+      - microservices-network
+    restart: unless-stopped
+
+  membership-service:
+    build:
+      context: .
+      dockerfile: MembershipService/Dockerfile
+    ports:
+      - "5003:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDbSettings__ConnectionString=mongodb://mongodb:27017
+      - MongoDbSettings__DatabaseName=MembershipDb
+      - RabbitMqSettings__HostName=rabbitmq
+      - RabbitMqSettings__UserName=guest
+      - RabbitMqSettings__Password=guest
+    depends_on:
+      - mongodb
+      - rabbitmq
+    networks:
+      - microservices-network
+    restart: unless-stopped
+
+  snapshot-coordinator:
+    build:
+      context: .
+      dockerfile: SnapshotCoordinator/Dockerfile
+    ports:
+      - "5004:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDbSettings__ConnectionString=mongodb://mongodb:27017
+      - MongoDbSettings__DatabaseName=SnapshotDb
+    depends_on:
+      - mongodb
+    networks:
+      - microservices-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - microservices-network
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - prometheus
+    networks:
+      - microservices-network
+    restart: unless-stopped
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ./microservices-dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "3001:80"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - membership-service
+      - order-service
+      - invoice-service
+    networks:
+      - microservices-network
+    restart: unless-stopped
+
+volumes:
+  rabbitmq_data:
+  mongodb_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  microservices-network:
+    driver: bridge 
