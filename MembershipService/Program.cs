@@ -1,5 +1,7 @@
 using MembershipService.Configuration;
 using MembershipService.Services;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,18 @@ builder.Services.Configure<RabbitMqSettings>(
 // Add membership services
 builder.Services.AddSingleton<InMemoryMembership>();
 builder.Services.AddHostedService<MembershipService.Worker>();
+builder.Services.AddSingleton<IMongoClient>(sp =>
+{
+    var settings = sp.GetRequiredService<IOptions<MongoDbSettings>>().Value;
+    return new MongoClient(settings.ConnectionString);
+});
+
+builder.Services.AddSingleton(sp =>
+{
+    var settings = sp.GetRequiredService<IOptions<MongoDbSettings>>().Value;
+    var client = sp.GetRequiredService<IMongoClient>();
+    return client.GetDatabase(settings.DatabaseName);
+});
 
 // Configure port for Docker container
 builder.WebHost.UseUrls("http://0.0.0.0:80");
